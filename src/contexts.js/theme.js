@@ -18,7 +18,7 @@ export const Theme = ({ children }) => {
   const [currentMode, setCurrentMode] = useState("light");
 
   const modeSwitch = () => {
-    if (mode === modes.light) {
+    if (mode.background === modes.light.background) {
       setMode(modes.dark);
       setCurrentMode("dark");
     } else {
