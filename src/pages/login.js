@@ -3,10 +3,11 @@ import Form from "react-bootstrap/Form";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
+import {loginStatus} from "../actions/login.actions"
 
 const Login = () => {
 
-  const loginStatus = useSelector((state) => state.loginStatus);
+  const loggedIn = useSelector((state) => state.loginStatus);
   const dispatch= useDispatch()
 
   const formik = useFormik({
@@ -47,7 +48,7 @@ const Login = () => {
           value={formik.values.password}/>
       </Form.Group>
 
-      <Button variant="primary" type="submit" onClick={()=> {formik.handleSubmit, dispatch(loginStatus(loginStatus))}}>
+      <Button variant="primary" type="submit" onClick={()=> {formik.handleSubmit, dispatch(loginStatus()), console.log(loggedIn)}}>
         login 
       </Button>
     </Form>

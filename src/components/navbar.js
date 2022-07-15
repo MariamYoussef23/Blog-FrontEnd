@@ -4,6 +4,7 @@ import {Link} from 'react-router-dom'
 import {useContext} from 'react';
 import {ThemeContext} from '../contexts.js/theme'
 
+
 function NavBar() {
 
   const {modeSwitch,currentMode } = useContext(ThemeContext)
@@ -14,6 +15,7 @@ function NavBar() {
         <Link className="mx-5 text-white text-decoration-none" to="/home">Blog Home</Link>
         <div>
         <Link className="mx-5" to="/home"> <PostForm /> </Link> 
+        <button>{}</button>
         <button onClick={modeSwitch}>{currentMode === 'light'? <>Dark Mode</> : <>Light Mode</>}</button>
         </div>
       </Navbar>
