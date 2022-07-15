@@ -1,58 +1,50 @@
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Routes, Route } from "react-router-dom";
-import { useState, useEffect } from "react";
-import axios from "axios";
+import { useEffect } from "react";
 import NavBar from "./components/navbar";
 import Home from "./pages/home";
 import PostDetails from "./pages/postDetails";
-
+import Login from "./pages/login";
+import { useDispatch, useSelector } from "react-redux";
+import { getPosts } from "./actions/posts.actions";
+import { getUsers } from "./actions/users.actions";
+import axios from "axios";
 
 function App() {
-  const [postsList, setPostsList] = useState([]);
-  const setNewList = (newList) => setPostsList(newList);
+  
 
-  const [users, setUsers] = useState([]);
-
-  const getUsers = async () => {
-    try {
-      const users = await axios.get(
-        "https://jsonplaceholder.typicode.com/users"
-      );
-      setUsers(users.data);
-    } catch (error) {}
-  };
-  useEffect(() => {
-    getUsers();
-  }, []);
+  const dispatch = useDispatch();
+  const posts = useSelector((state) => state.posts);
+  const users = useSelector((state) => state.users);
 
   useEffect(() => {
     axios
       .get("https://api.tawwr.com/posts")
-      .then((postsList) => setPostsList(postsList.data.data));
+      .then((posts) => dispatch(getPosts(posts.data.data)));
+  }, [posts]);
+
+  const getUsersA = async () => {
+    try {
+      const users = await axios.get(
+        "https://jsonplaceholder.typicode.com/users"
+      );
+      dispatch(getUsers(users.data));
+    } catch (error) {}
+  };
+  useEffect(() => {
+    getUsersA();
   }, []);
 
   return (
-    <div >
-        
-        <NavBar setNewList={setNewList} />
-        <Routes>
-          <Route
-            path="/"
-            element={<Home postsList={postsList} users={users} />}
-          />
-          <Route
-            path="/post/:id"
-            element={
-              <PostDetails
-                postsList={postsList}
-                users={users}
-                setNewList={setNewList}
-              />
-            }
-          />
-        </Routes>
-
+    <div>
+      <NavBar />
+      <Routes>
+        <Route path="/" element={<Login/> }/> 
+        <Route path="/home" element={<Home />} />
+        <Route path="/post/:id" element={<PostDetails />} />
+      </Routes>
+      
     </div>
   );
 }

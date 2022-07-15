@@ -4,8 +4,15 @@ import Card from "react-bootstrap/Card";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
+import {useDispatch, useSelector} from 'react-redux'
+import {getPosts} from '../actions/posts.actions'
 
-function PostComment({ post, id, setNewList }) {
+
+function PostComment({ id}) {
+  const posts = useSelector (state => state.posts)
+  const dispatch = useDispatch()
+
+
   const formik = useFormik({
     initialValues: {
       userId: "",
@@ -26,7 +33,7 @@ function PostComment({ post, id, setNewList }) {
       try {
         const data = await axios.post(`https://api.tawwr.com/posts/${id}/comment`, values);
         const newList = await axios.get("https://api.tawwr.com/posts");
-        setNewList(newList.data.data);
+        dispatch(getPosts((posts.data.data)));
       } catch (error) {
           console.error({x: error})
       }

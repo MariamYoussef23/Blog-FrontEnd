@@ -2,8 +2,12 @@ import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import { Link } from "react-router-dom";
 import moment from 'moment';
+import {useSelector} from 'react-redux'
 
-function Post({ post, users}) {
+function Post({post}) {
+
+  const users = useSelector(state => state.users)
+  
 
   return (
     <Card className="m-5">

@@ -5,8 +5,13 @@ import Modal from "react-bootstrap/Modal";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { getPosts } from "../actions/posts.actions";
 
-function PostForm({ setNewList }) {
+function PostForm() {
+  const posts = useSelector((state) => state.posts);
+  const dispatch = useDispatch();
+
   const [show, setShow] = useState(false);
   const handleClose = () => {
     formik.resetForm
@@ -17,8 +22,8 @@ function PostForm({ setNewList }) {
   const postNew = async (values) => {
     try {
       const data = await axios.post("https://api.tawwr.com/posts", values);
-      const newList = await axios.get("https://api.tawwr.com/posts");
-      setNewList(newList.data.data);
+      // const posts = await axios.get("https://api.tawwr.com/posts");
+      // dispatch(getPosts(posts.data.data));
     } catch (error) {}
   };
 
@@ -53,7 +58,7 @@ function PostForm({ setNewList }) {
       </Button>
 
       <Modal show={show} onHide={handleClose} animation={false}>
-        <Modal.Header closeButton>
+        <Modal.Header closeButton onClick={formik.resetForm}>
           <Modal.Title>Your Next Post</Modal.Title>
         </Modal.Header>
         <Modal.Body>
