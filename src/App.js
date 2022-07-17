@@ -2,21 +2,19 @@ import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Home from "./pages/home";
 import Login from "./pages/login";
-// import { Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 // import { useEffect } from "react";
-// import NavBar from "./components/navbar";
-// import PostDetails from "./pages/postDetails";
+import NavBar from "./components/navbar";
+import PostDetails from "./pages/postDetails";
 // import { useDispatch, useSelector } from "react-redux";
 // import { getPosts } from "./actions/posts.actions";
 // import { getUsers } from "./actions/users.actions";
 // import axios from "axios";
-import {useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 function App() {
-  
   const loggedIn = useSelector((state) => state.loginStatus);
 
-  
   // const dispatch = useDispatch();
   // const posts = useSelector((state) => state.posts);
   // const users = useSelector((state) => state.users);
@@ -41,8 +39,7 @@ function App() {
 
   return (
     <div>
-
-    {loggedIn ? <Home /> : <Login/>}
+      {loggedIn ? <Home/> : <Login />}
 
       {/* <NavBar />
       <Routes>
@@ -50,7 +47,7 @@ function App() {
         <Route path="/home" element={<Home />} />
         <Route path="/post/:id" element={<PostDetails />} />
       </Routes> */}
-      
+
     </div>
   );
 }

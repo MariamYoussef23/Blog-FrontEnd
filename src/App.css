@@ -36,3 +36,49 @@
     transform: rotate(360deg);
   }
 }
+
+.dark-primary {
+  background-color: #111111;
+   color: white 
+}
+
+.dark-secondary { 
+  background: #333333 !important;
+  color: white
+}
+
+.dark-third {
+  background-color: #555555 !important;
+  color: white 
+}
+
+.dark-fourth {
+  background-color: #777777 !important;
+  color: white 
+}
+
+
+
+.light-primary {
+  background-color: #757575!important;
+  color: black !important
+}
+
+.light-secondary{
+  background-color: #EEEEEE !important;
+  color: black !important
+}
+
+.light-third{
+  background-color: #E0E0E0 !important;
+  color: black !important
+}
+
+.light-fourth{
+  background-color: #bdbdbd !important;
+  color: black !important
+}
+
+/* .placeholder{
+  color: black !important
+} */

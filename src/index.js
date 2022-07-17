@@ -11,6 +11,7 @@ import {reducers} from './reducers'
 import { ThemeProvider } from "react-bootstrap";
 
 
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 const store = createStore(reducers)

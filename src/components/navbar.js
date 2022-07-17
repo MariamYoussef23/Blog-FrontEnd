@@ -1,22 +1,40 @@
 import PostForm from "./postForm";
 import Navbar from "react-bootstrap/Navbar";
-import {Link} from 'react-router-dom'
-import {useContext} from 'react';
-import {ThemeContext} from '../contexts.js/theme'
-
+import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { ThemeContext } from "../contexts.js/theme";
+import { useDispatch, useSelector } from "react-redux";
+import { loginStatus } from "../actions/login.actions";
 
 function NavBar() {
+  const loggedIn = useSelector((state) => state.loginStatus);
+  const dispatch = useDispatch();
 
-  const {modeSwitch,currentMode } = useContext(ThemeContext)
+  const { modes, mode, modeSwitch, currentMode } = useContext(ThemeContext);
 
   return (
-    <div>
-      <Navbar bg="dark" variant="dark" className="d-flex justify-content-between">
-        <Link className="mx-5 text-white text-decoration-none" to="/home">Blog Home</Link>
+    <div className={` ${currentMode ? mode.primaryLight : mode.primaryDark}`}>
+      <Navbar
+        className= "d-flex justify-content-between" 
+      >
+        <Link className={`mx-5 text-decoration-none ${currentMode ? 'text-black': 'text-white'}`} to="/">
+          Blog Home
+        </Link>
         <div>
-        <Link className="mx-5" to="/home"> <PostForm /> </Link> 
-        <button>{}</button>
-        <button onClick={modeSwitch}>{currentMode === 'light'? <>Dark Mode</> : <>Light Mode</>}</button>
+          <Link className="mx-5" to="/">
+            {" "}
+            <PostForm />{" "}
+          </Link>
+          <button
+            onClick={() => {
+              dispatch(loginStatus(loggedIn));
+            }}
+          >
+            {loggedIn && <>Logout</>}
+          </button>
+          <button onClick={() => modeSwitch(currentMode)}>
+            {currentMode ? <>Dark Mode</> : <>Light Mode</>}
+          </button>
         </div>
       </Navbar>
     </div>
@@ -24,4 +42,3 @@ function NavBar() {
 }
 
 export default NavBar;
-

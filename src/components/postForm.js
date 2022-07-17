@@ -7,8 +7,13 @@ import * as Yup from "yup";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { getPosts } from "../actions/posts.actions";
+import { useContext } from "react";
+import { ThemeContext } from "../contexts.js/theme";
 
 function PostForm() {
+
+  const { currentMode, mode } = useContext(ThemeContext);
+  
   const posts = useSelector((state) => state.posts);
   const dispatch = useDispatch();
 
@@ -22,8 +27,8 @@ function PostForm() {
   const postNew = async (values) => {
     try {
       const data = await axios.post("https://api.tawwr.com/posts", values);
-      // const posts = await axios.get("https://api.tawwr.com/posts");
-      // dispatch(getPosts(posts.data.data));
+      const posts = await axios.get("https://api.tawwr.com/posts");
+      dispatch(getPosts(posts.data.data));
     } catch (error) {}
   };
 
@@ -58,14 +63,14 @@ function PostForm() {
       </Button>
 
       <Modal show={show} onHide={handleClose} animation={false}>
-        <Modal.Header closeButton onClick={formik.resetForm}>
+        <Modal.Header closeButton onClick={formik.resetForm} className={`${currentMode ? mode.secondaryLight : mode.secondaryDark}`}>
           <Modal.Title>Your Next Post</Modal.Title>
         </Modal.Header>
-        <Modal.Body>
+        <Modal.Body className={`${currentMode ? mode.thirdLight : mode.thirdDark }`}>
           <div className="input-container">
             <Form.Group className="mb-3" controlId="formBasicEmail">
               <Form.Label>title</Form.Label>
-              <Form.Control
+              <Form.Control 
                 type="text"
                 placeholder="Post Title"
                 name="title"
@@ -116,7 +121,7 @@ function PostForm() {
             </Form.Group>
           </div>
         </Modal.Body>
-        <Modal.Footer>
+        <Modal.Footer className={`${currentMode ? mode.thirdLight : mode.thirdDark } border-0`}>
           <Button variant="primary" onClick={formik.handleSubmit}>
             Submit
           </Button>

@@ -12,17 +12,20 @@ import { getUsers } from "../actions/users.actions";
 import axios from "axios";
 
 function Home() {
-  const { mode } = useContext(ThemeContext);
-
+  const { currentMode, mode } = useContext(ThemeContext);
+  
   const dispatch = useDispatch();
   const posts = useSelector((state) => state.posts);
-  // const users = useSelector((state) => state.users);
+  
+  // const loggedIn = useSelector((state) => state.loginStatus)
+  // console.log(loggedIn)
 
   useEffect(() => {
     axios
       .get("https://api.tawwr.com/posts")
       .then((posts) => dispatch(getPosts(posts.data.data)));
-  }, [posts]);
+      
+  }, []);
 
   const getUsersA = async () => {
     try {
@@ -37,13 +40,16 @@ function Home() {
   }, []);
 
   return (
-    <div style={{ ...mode }}>
+    <div className={`${currentMode ? mode.secondaryLight : mode.secondaryDark }`}>
       <NavBar />
       <Routes>
-        <Route path="/home" element={<Home />} />
+        {/* <Route path="/" element={<Home />} /> */}
         <Route path="/post/:id" element={<PostDetails />} />
       </Routes>
-      <Posts />
+      <Posts /> 
+
+  
+      
     </div>
   );
 }

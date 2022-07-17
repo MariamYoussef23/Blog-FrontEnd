@@ -5,30 +5,35 @@ export const ThemeContext = createContext();
 export const Theme = ({ children }) => {
   const modes = {
     light: {
-      background: "#F5F5F5",
-      color: "black",
+      primaryLight: "light-primary",
+      secondaryLight: "light-secondary",
+      thirdLight: "light-third ",
+      fourthLight: "light-fourth"
     },
 
     dark: {
-      background: "#0d1117",
-      color: "#f0f6fc",
+      primaryDark: "dark-primary",
+      secondaryDark: "dark-secondary",
+      thirdDark: "dark-third ",
+      fourthDark: "dark-fourth"
     },
   };
   const [mode, setMode] = useState(modes.light);
-  const [currentMode, setCurrentMode] = useState("light");
+  const [currentMode, setCurrentMode] = useState(true);
 
-  const modeSwitch = () => {
-    if (mode.background === modes.light.background) {
-      setMode(modes.dark);
-      setCurrentMode("dark");
+  const modeSwitch = (value) => {
+    if (value) {
+      setMode(modes.dark)
+      setCurrentMode(false);
     } else {
-      setMode(modes.light);
-      setCurrentMode("light");
+      setMode(modes.light)
+      setCurrentMode(true);
     }
+    console.log(currentMode)
   };
 
   return (
-    <ThemeContext.Provider value={{ mode, currentMode, modeSwitch }}>
+    <ThemeContext.Provider value={{modes, mode, currentMode, modeSwitch }}>
       {children}
     </ThemeContext.Provider>
   );

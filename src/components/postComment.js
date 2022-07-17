@@ -6,12 +6,16 @@ import * as Yup from "yup";
 import axios from "axios";
 import {useDispatch, useSelector} from 'react-redux'
 import {getPosts} from '../actions/posts.actions'
+import { ThemeContext } from "../contexts.js/theme";
+import { useContext } from "react";
 
 
 function PostComment({ id}) {
+
   const posts = useSelector (state => state.posts)
   const dispatch = useDispatch()
 
+  const { currentMode, mode } = useContext(ThemeContext);
 
   const formik = useFormik({
     initialValues: {
@@ -41,14 +45,14 @@ function PostComment({ id}) {
 
   return (
     <>
-      <Form onSubmit={formik.handleSubmit}>
+      <Form onSubmit={formik.handleSubmit} >
         <Card className="m-5">
-          <Card.Header as="h5">
+          <Card.Header as="h5" className={`${currentMode ? mode.thirdLight : mode.secondaryDark}`}>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
               <Form.Label>New Comment</Form.Label>
             </Form.Group>
           </Card.Header>
-          <Card.Body>
+          <Card.Body className={`${currentMode ? mode.secondLight : mode.secondaryDark}`}>
             <Card.Text>
               <Form.Group
                 className="mb-3"
