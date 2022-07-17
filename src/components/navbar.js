@@ -25,16 +25,16 @@ function NavBar() {
             {" "}
             <PostForm />{" "}
           </Link>
-          <button
+          <Link to="/" > <button
             onClick={() => {
-              dispatch(loginStatus(loggedIn));
+              dispatch(loginStatus(loggedIn),console.log(loggedIn));
             }}
           >
             {loggedIn && <>Logout</>}
-          </button>
+          </button> </Link>
           <button onClick={() => modeSwitch(currentMode)}>
             {currentMode ? <>Dark Mode</> : <>Light Mode</>}
-          </button>
+          </button> 
         </div>
       </Navbar>
     </div>

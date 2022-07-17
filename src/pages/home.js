@@ -41,11 +41,7 @@ function Home() {
 
   return (
     <div className={`${currentMode ? mode.secondaryLight : mode.secondaryDark }`}>
-      <NavBar />
-      <Routes>
-        {/* <Route path="/" element={<Home />} /> */}
-        <Route path="/post/:id" element={<PostDetails />} />
-      </Routes>
+      
       <Posts /> 
 
   
@@ -55,3 +51,9 @@ function Home() {
 }
 
 export default Home;
+
+{/* <NavBar /> */}
+      {/* <Routes>
+        {/* <Route path="/" element={<Home />} /> */}
+        {/* <Route path="/post/:id" element={<PostDetails />} />
+      </Routes> */} 

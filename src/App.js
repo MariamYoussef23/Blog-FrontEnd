@@ -39,15 +39,13 @@ function App() {
 
   return (
     <div>
-      {loggedIn ? <Home/> : <Login />}
-
-      {/* <NavBar />
+      
+      {loggedIn && <NavBar /> }
       <Routes>
-        <Route path="/" element={<Login/> }/> 
-        <Route path="/home" element={<Home />} />
+        <Route path="/" element={loggedIn ? <Home/> : <Login />}/> 
         <Route path="/post/:id" element={<PostDetails />} />
-      </Routes> */}
-
+      </Routes>
+      
     </div>
   );
 }
