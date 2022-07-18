@@ -12,6 +12,7 @@ import Image from "react-bootstrap/Image";
 import { AiOutlineComment } from "react-icons/ai";
 import { FaRegThumbsUp, FaRegThumbsDown } from "react-icons/fa";
 import Button from "react-bootstrap/Button";
+// import {addVote} from '../functions/votes'
 
 function postDetails() {
   const { currentMode, mode } = useContext(ThemeContext);
@@ -45,9 +46,11 @@ function postDetails() {
 
   return (
     <div
-      className={` ${currentMode ? mode.secondaryLight : mode.secondaryDark}`}
+      className={`container-fluid ${
+        currentMode ? mode.secondaryLight : mode.secondaryDark
+      }`}
     >
-      <div className="py-1 px-5">
+      <div className="py-1 px-5 ">
         <Card
           className={` border-0 w-50 my-5 ${
             currentMode ? mode.primaryLight : mode.primaryDark
@@ -101,21 +104,29 @@ function postDetails() {
           currentMode ? mode.primaryLight : mode.primaryDark
         } `}
       >
-        <Card.Title>Comments</Card.Title>
+        <Card.Title className="d-flex px-3 py-3 ">Comments</Card.Title>
         <hr className="m-0" style={{ color: "grey" }}></hr>
-        <Card.Body></Card.Body>
-        {post.comments.map((comment) => {
-          return (
-            <div key={comment.id} >
-              <div>
-                <Image src={userImg} roundedCircle height={38}></Image>
+        <Card.Body>
+          {post.comments.map((comment) => {
+            return (
+              <div key={comment.id}>
+                <div className="d-flex px-3 py-3 ">
+                  <div>
+                    <Image src={userImg} roundedCircle height={38}></Image>
+                  </div>
+                  <div>
+                    User:{" "}
+                    {users.map((user) => user.id === post.userId && user.name)}
+                    <p>{comment.body}</p>
+                  </div>
+                </div>
               </div>
-              <div ></div>
-              User: {users.map((user) => user.id === post.userId && user.name)}
-              <p>{comment.body}</p>
-            </div>
-          );
-        })}
+            );
+          })}
+          <div>
+            <PostComment post={post} id={id} />
+          </div>
+        </Card.Body>
       </Card>
 
       {/* <div>
@@ -138,7 +149,7 @@ function postDetails() {
         })}
       </div> */}
 
-      <PostComment post={post} id={id} />
+      {/* <PostComment post={post} id={id} /> */}
     </div>
   );
 }

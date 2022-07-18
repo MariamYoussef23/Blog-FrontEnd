@@ -19,7 +19,7 @@ function PostComment({ id}) {
 
   const formik = useFormik({
     initialValues: {
-      userId: "",
+      userId: 1,
       body: "",
     },
     validationSchema: Yup.object({
@@ -29,6 +29,7 @@ function PostComment({ id}) {
     onSubmit: (values) => {
         console.log({values})
         newComment(values)
+        formik.resetForm
 
       },
   });
@@ -37,7 +38,7 @@ function PostComment({ id}) {
       try {
         const data = await axios.post(`https://api.tawwr.com/posts/${id}/comment`, values);
         const newList = await axios.get("https://api.tawwr.com/posts");
-        dispatch(getPosts((posts.data.data)));
+        dispatch(getPosts((newList.data.data)));
       } catch (error) {
           console.error({x: error})
       }
@@ -46,29 +47,7 @@ function PostComment({ id}) {
   return (
     <>
       <Form onSubmit={formik.handleSubmit} >
-        <Card className="m-5">
-          <Card.Header as="h5" className={`${currentMode ? mode.thirdLight : mode.secondaryDark}`}>
-            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-              <Form.Label>New Comment</Form.Label>
-            </Form.Group>
-          </Card.Header>
-          <Card.Body className={`${currentMode ? mode.secondLight : mode.secondaryDark}`}>
-            <Card.Text>
-              <Form.Group
-                className="mb-3"
-                controlId="exampleForm.ControlTextarea1"
-              >
-                <Form.Control
-                  type="number"
-                  placeholder="userId"
-                  name="userId"
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                />
-                <Form.Text className="text-muted">
-                  {formik.touched.userId ? <p>{formik.errors.userId}</p> : null}
-                </Form.Text>
-              </Form.Group>
+        
 
               <Form.Group
                 className="mb-3"
@@ -78,34 +57,25 @@ function PostComment({ id}) {
                   as="textarea"
                   rows={3}
                   type="text"
-                  placeholder="write comment ..."
+                  placeholder="write a comment ..."
                   name="body"
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
+                  value={formik.values.body}
+                  
+                  
                 />
                 <Form.Text className="text-muted">
                   {formik.touched.body ? <p>{formik.errors.body}</p> : null}
                 </Form.Text>
               </Form.Group>
-            </Card.Text>
-            <Button variant="primary" type="submit">
+            
+            <Button variant="primary" type="submit" style={{color:"white",backgroundColor: "#ff5700", border:"#ff5700"}}>
               Add Comment
             </Button>
-          </Card.Body>
-        </Card>
+          
       </Form>
 
-      {/* <Form>
-        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-          <Form.Label>Email address</Form.Label>
-          <Form.Control type="email" placeholder="name@example.com" />
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-          <Form.Label>Example textarea</Form.Label>
-          <Form.Control as="textarea" rows={3} />
-        </Form.Group>
-        <button type="submit"> Add Comment </button>
-      </Form> */}
     </>
   );
 }

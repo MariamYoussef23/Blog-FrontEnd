@@ -55,7 +55,7 @@ function Post({ post }) {
                 to={loggedIn ? "/post/" + post.id : "/Login"}
               >
                 <Button className="mx-2" style={{color:"white",backgroundColor: "#ff5700", border:"#ff5700"}}>Read More</Button>
-                {/* <CgMoreR size={25} style={{ color: "#ff5700" }}/>Read More */}
+                
               </Link>
             </div>
 

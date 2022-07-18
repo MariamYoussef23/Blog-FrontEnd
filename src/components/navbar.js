@@ -23,7 +23,7 @@ function NavBar() {
   const { modes, mode, modeSwitch, currentMode } = useContext(ThemeContext);
 
   return (
-   <div className={`${currentMode ? mode.primaryLight : mode.primaryDark} px-5 `}>
+   <div className={`container-fluid ${currentMode ? mode.primaryLight : mode.primaryDark} px-5 `}>
       <Navbar className="d-flex justify-content-between">
         <Link
           className={`mx-2 text-decoration-none ${
@@ -54,6 +54,7 @@ function NavBar() {
               </div>
             </Link>
           ) : (
+            
             <Link to="/Login">
               <Button className="mx-2" style={{color:"white",backgroundColor: "#ff5700", border:"#ff5700"}}>logIn</Button>
             </Link>

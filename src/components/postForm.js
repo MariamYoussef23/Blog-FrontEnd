@@ -63,10 +63,10 @@ function PostForm() {
       </Button>
 
       <Modal show={show} onHide={handleClose} animation={false}>
-        <Modal.Header closeButton onClick={formik.resetForm} className={`${currentMode ? mode.secondaryLight : mode.secondaryDark}`}>
+        <Modal.Header closeButton onClick={formik.resetForm} className={`border-0 ${currentMode ? mode.primaryLight : mode.primaryDark}`}>
           <Modal.Title>Your Next Post</Modal.Title>
         </Modal.Header>
-        <Modal.Body className={`${currentMode ? mode.thirdLight : mode.thirdDark }`}>
+        <Modal.Body className={`${currentMode ? mode.primaryLight : mode.primaryDark }`}>
           <div className="input-container">
             <Form.Group className="mb-3" controlId="formBasicEmail">
               <Form.Label>title</Form.Label>
@@ -121,8 +121,8 @@ function PostForm() {
             </Form.Group>
           </div>
         </Modal.Body>
-        <Modal.Footer className={`${currentMode ? mode.thirdLight : mode.thirdDark } border-0`}>
-          <Button variant="primary" onClick={formik.handleSubmit}>
+        <Modal.Footer className={`${currentMode ? mode.primaryLight : mode.primaryDark } border-0`}>
+          <Button style={{color:"white",backgroundColor: "#ff5700", border:"#ff5700"}} onClick={formik.handleSubmit}>
             Submit
           </Button>
         </Modal.Footer>
