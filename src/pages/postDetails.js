@@ -7,10 +7,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { getPosts } from "../actions/posts.actions";
 import { ThemeContext } from "../contexts.js/theme";
 import { useContext } from "react";
-
+import userImg from "../images/userImg.jpeg";
+import Image from "react-bootstrap/Image";
+import { AiOutlineComment } from "react-icons/ai";
+import { FaRegThumbsUp, FaRegThumbsDown } from "react-icons/fa";
+import Button from "react-bootstrap/Button";
 
 function postDetails() {
-
   const { currentMode, mode } = useContext(ThemeContext);
 
   const { id } = useParams();
@@ -41,34 +44,101 @@ function postDetails() {
   };
 
   return (
-    <div className="m-5">
-      <h1>{post.title}</h1>
-      <button onClick={() => addVote(1)}>UpVote</button>
-      <button onClick={() => addVote(-1)}>DownVote</button>
-
-      <p>
-        Post made by:{users.map((user) => user.id === post.userId && user.name)}{" "}
-      </p>
-
-      <p>{post.body}</p>
-      <p>{moment(post.createdAt).format("MMMM Do YYYY, h:mm:ss a")}</p>
-      <PostComment post={post} id={id} />
-      <>
-        <div>
-          
-          {post.comments.map((comment) => {
-            return (
-              <div key={comment.id} className="row m-5">
-                <Card body className="m-4"className={`${currentMode ? mode.thirdLight : mode.thirdDark} col-6`}>
-                  User:{" "}
-                  {users.map((user) => user.id === post.userId && user.name)}
-                  <p>{comment.body}</p>
-                </Card>
+    <div
+      className={` ${currentMode ? mode.secondaryLight : mode.secondaryDark}`}
+    >
+      <div className="py-1 px-5">
+        <Card
+          className={` border-0 w-50 my-5 ${
+            currentMode ? mode.primaryLight : mode.primaryDark
+          } `}
+        >
+          <div className="d-flex px-3 py-3 ">
+            <div>
+              <Image src={userImg} roundedCircle height={38}></Image>
+            </div>
+            <div className="mx-3">
+              <div>
+                <Card.Title>{post.title}</Card.Title>
               </div>
-            );
-          })}
-        </div>
-      </>
+              <div>
+                {users.map((user) => user.id === post.userId && user.name)} -
+                {moment(post.createdAt).format("MMMM D")} at{" "}
+                {moment(post.createdAt).format("h:mma")}
+              </div>
+            </div>
+          </div>
+          <hr className="m-0" style={{ color: "grey" }}></hr>
+          <Card.Body>
+            <Card.Text>{post.body}</Card.Text>
+            <div className="d-flex ">
+              <div className=" mx-2">
+                <AiOutlineComment size={25} style={{ color: "#ff5700" }} />
+                {post.comments.length}
+              </div>
+              <div className=" mx-2">
+                <FaRegThumbsUp
+                  onClick={() => addVote(1)}
+                  style={{ color: "#ff5700" }}
+                />
+                {post.downVotesTotal}
+              </div>
+              <div className=" mx-2">
+                <FaRegThumbsDown
+                  onClick={() => addVote(-1)}
+                  style={{ color: "#ff5700" }}
+                />{" "}
+                {post.upVotesTotal}
+                {console.log(post)}
+              </div>
+            </div>
+          </Card.Body>
+        </Card>
+      </div>
+
+      <Card
+        className={` border-0 w-50 m-5 ${
+          currentMode ? mode.primaryLight : mode.primaryDark
+        } `}
+      >
+        <Card.Title>Comments</Card.Title>
+        <hr className="m-0" style={{ color: "grey" }}></hr>
+        <Card.Body></Card.Body>
+        {post.comments.map((comment) => {
+          return (
+            <div key={comment.id} >
+              <div>
+                <Image src={userImg} roundedCircle height={38}></Image>
+              </div>
+              <div ></div>
+              User: {users.map((user) => user.id === post.userId && user.name)}
+              <p>{comment.body}</p>
+            </div>
+          );
+        })}
+      </Card>
+
+      {/* <div>
+        {post.comments.map((comment) => {
+          return (
+            <div key={comment.id} className="row m-5">
+              <Card
+                body
+                className="m-4"
+                className={`${
+                  currentMode ? mode.thirdLight : mode.thirdDark
+                } col-6`}
+              >
+                User:{" "}
+                {users.map((user) => user.id === post.userId && user.name)}
+                <p>{comment.body}</p>
+              </Card>
+            </div>
+          );
+        })}
+      </div> */}
+
+      <PostComment post={post} id={id} />
     </div>
   );
 }

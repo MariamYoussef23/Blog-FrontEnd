@@ -38,13 +38,13 @@
 }
 
 .dark-primary {
-  background-color: #111111;
-   color: white 
+  background-color: #1A1A1B!important;
+   color: white !important
 }
 
 .dark-secondary { 
-  background: #333333 !important;
-  color: white
+  background: #000000 !important;
+  color: white!important
 }
 
 .dark-third {
@@ -60,12 +60,12 @@
 
 
 .light-primary {
-  background-color: #757575!important;
+  background-color: white !important;
   color: black !important
 }
 
 .light-secondary{
-  background-color: #EEEEEE !important;
+  background-color: #EFEFED !important;
   color: black !important
 }
 
@@ -79,6 +79,9 @@
   color: black !important
 }
 
-/* .placeholder{
-  color: black !important
-} */
+
+.custom-btn {
+  background-Color: #FF5570!important;
+  color: white 
+
+}

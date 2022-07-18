@@ -38,13 +38,20 @@ function App() {
   // }, []);
 
   return (
-    <div>
+    <div >
       
-      {loggedIn && <NavBar /> }
+       <NavBar />
+      
       <Routes>
+        <Route path="/" element={<Home />}/> 
+        {loggedIn && <Route path="/post/:id" element={<PostDetails />} /> }
+        {/* <Route path="/post/:id" element={<PostDetails />} /> */}
+        <Route path="/login" element={<Login/>}/> 
+      </Routes>
+      {/* <Routes>
         <Route path="/" element={loggedIn ? <Home/> : <Login />}/> 
         <Route path="/post/:id" element={<PostDetails />} />
-      </Routes>
+      </Routes> */}
       
     </div>
   );

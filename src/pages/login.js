@@ -3,12 +3,14 @@ import Form from "react-bootstrap/Form";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
-import { loginStatus } from "../actions/login.actions";
+import { login, logout } from "../actions/login.actions";
 import Card from "react-bootstrap/Card";
+import {useNavigate} from "react-router-dom"
 
 const Login = () => {
   const loggedIn = useSelector((state) => state.loginStatus);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const formik = useFormik({
     initialValues: {
@@ -56,11 +58,11 @@ const Login = () => {
 
           <Button
             variant="primary"
-            type="submit"
             onClick={() => {
-              formik.handleSubmit,
-                dispatch(loginStatus(loggedIn)),
+              formik.handleSubmit;
+                dispatch(login());
                 console.log(loggedIn);
+                navigate("/")
             }}
           >
             login

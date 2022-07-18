@@ -2,6 +2,7 @@ import { useSelector} from "react-redux"
 import Post from './post'
 
 
+
 function Posts() {
 
   
@@ -11,7 +12,7 @@ function Posts() {
   const posts = useSelector( state => state.posts)
   
   return (
-    <div>
+    <div className="py-1 px-5">
       {posts.length > 0 ? posts?.map((post) => {
         return (
             <Post key={post.id} post={post} />

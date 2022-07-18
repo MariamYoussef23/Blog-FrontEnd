@@ -1,7 +1,9 @@
 const reducer = (state = false, action ) => {
     switch(action.type) {
-        case 'LOGIN_STATUS' : 
-            return !action.payload;
+        case 'LOGIN' : 
+            return true;
+        case 'LOGOUT' : 
+            return false;
         default : 
             return state;
     }

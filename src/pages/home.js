@@ -17,7 +17,7 @@ function Home() {
   const dispatch = useDispatch();
   const posts = useSelector((state) => state.posts);
   
-  // const loggedIn = useSelector((state) => state.loginStatus)
+  const loggedIn = useSelector((state) => state.loginStatus)
   // console.log(loggedIn)
 
   useEffect(() => {
@@ -32,7 +32,8 @@ function Home() {
       const users = await axios.get(
         "https://jsonplaceholder.typicode.com/users"
       );
-      dispatch(getUsers(users.data));
+      dispatch(getUsers(users.data))
+      
     } catch (error) {}
   };
   useEffect(() => {
@@ -41,11 +42,7 @@ function Home() {
 
   return (
     <div className={`${currentMode ? mode.secondaryLight : mode.secondaryDark }`}>
-      
       <Posts /> 
-
-  
-      
     </div>
   );
 }

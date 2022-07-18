@@ -58,7 +58,7 @@ function PostForm() {
 
   return (
     <>
-      <Button variant="primary" onClick={handleShow}>
+      <Button style={{color:"white",backgroundColor: "#ff5700", border:"#ff5700"}} onClick={handleShow}>
         + New Post
       </Button>
 
