@@ -107,7 +107,7 @@ function PostForm() {
           <Form.Group className="mb-3" controlId="formBasicEmail">
               <Form.Control as="textarea" rows={3}
                 type="text"
-                placeholder="write post ..."
+                placeholder=" start writing ..."
                 name="body"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}

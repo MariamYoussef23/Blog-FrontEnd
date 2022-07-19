@@ -13,6 +13,7 @@ import reddit_logo_dark from "../images/reddit_logo_dark.png";
 import userImg from "../images/userImg.jpeg"
 import { IoIosMoon } from "react-icons/io";
 import { IoSunny  } from "react-icons/io5";
+import Login from "../pages/login"
 
 
 function NavBar() {
@@ -55,8 +56,8 @@ function NavBar() {
             </Link>
           ) : (
             
-            <Link to="/Login">
-              <Button className="mx-2" style={{color:"white",backgroundColor: "#ff5700", border:"#ff5700"}}>logIn</Button>
+            <Link to="/">
+              <Login />
             </Link>
           )}
           </div>

@@ -8,7 +8,7 @@ import { useContext } from "react";
 import userImg from "../images/userImg.jpeg";
 import Image from "react-bootstrap/Image";
 import { AiOutlineComment } from "react-icons/ai";
-
+import Login from "../pages/login";
 
 function Post({ post }) {
   const users = useSelector((state) => state.users);
@@ -38,7 +38,7 @@ function Post({ post }) {
             </div>
           </div>
         </div>
-        <hr className ="m-0" style={{color:"grey"}} ></hr>
+        <hr className="m-0" style={{ color: "grey" }}></hr>
         <Card.Body>
           <Card.Title>{post.title}</Card.Title>
           <Card.Text>{post.body}</Card.Text>
@@ -47,18 +47,22 @@ function Post({ post }) {
             <div>
               {post.comments.length}
               <AiOutlineComment size={25} style={{ color: "#ff5700" }} />
-
             </div>
 
-            <div >
-              <Link
-                to={loggedIn ? "/post/" + post.id : "/Login"}
-              >
-                <Button className="mx-2" style={{color:"white",backgroundColor: "#ff5700", border:"#ff5700"}}>Read More</Button>
-                
+            <div>
+              <Link to={loggedIn ? "/post/" + post.id : <Login />}>
+                <Button
+                  className="mx-2"
+                  style={{
+                    color: "white",
+                    backgroundColor: "#ff5700",
+                    border: "#ff5700",
+                  }}
+                >
+                  Read More
+                </Button>
               </Link>
             </div>
-
           </div>
         </Card.Body>
       </Card>
