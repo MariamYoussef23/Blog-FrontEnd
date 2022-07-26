@@ -22,10 +22,10 @@ function Home() {
 
   useEffect(() => {
     axios
-      .get("https://api.tawwr.com/posts")
+      .get("http://localhost:5000/posts")
       .then((posts) => dispatch(getPosts(posts.data.data)));
-      
   }, []);
+  
 
   const getUsersA = async () => {
     try {

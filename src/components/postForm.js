@@ -26,8 +26,8 @@ function PostForm() {
 
   const postNew = async (values) => {
     try {
-      const data = await axios.post("https://api.tawwr.com/posts", values);
-      const posts = await axios.get("https://api.tawwr.com/posts");
+      const data = await axios.post("http://localhost:5000/posts", values);
+      const posts = await axios.get("http://localhost:5000/posts");
       dispatch(getPosts(posts.data.data));
     } catch (error) {}
   };

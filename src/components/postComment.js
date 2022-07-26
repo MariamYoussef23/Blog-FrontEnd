@@ -27,7 +27,6 @@ function PostComment({ id}) {
       body: Yup.string().required("Required"),
     }),
     onSubmit: (values) => {
-        console.log({values})
         newComment(values)
         formik.resetForm
 
@@ -36,8 +35,8 @@ function PostComment({ id}) {
 
     const newComment = async (values) => {
       try {
-        const data = await axios.post(`https://api.tawwr.com/posts/${id}/comment`, values);
-        const newList = await axios.get("https://api.tawwr.com/posts");
+        const data = await axios.post(`http://localhost:5000/posts/${id}/comment`, values);
+        const newList = await axios.get("http://localhost:5000/posts");
         dispatch(getPosts((newList.data.data)));
       } catch (error) {
           console.error({x: error})

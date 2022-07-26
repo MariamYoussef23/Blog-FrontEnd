@@ -1,6 +1,6 @@
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import moment from "moment";
 import { useSelector } from "react-redux";
 import { ThemeContext } from "../contexts.js/theme";
@@ -13,8 +13,14 @@ import Login from "../pages/login";
 function Post({ post }) {
   const users = useSelector((state) => state.users);
   const loggedIn = useSelector((state) => state.loginStatus);
-
+  const navigate = useNavigate()
   const { currentMode, mode } = useContext(ThemeContext);
+
+  const handleClick = ()=> {
+    loggedIn ? 
+   navigate("/post/" + post.id) :
+   alert("You must login first.")
+  }
 
   return (
     <div>
@@ -50,7 +56,23 @@ function Post({ post }) {
             </div>
 
             <div>
-              <Link to={loggedIn ? "/post/" + post.id : <Login />}>
+              
+                  <Button
+                    className="mx-2"
+                    style={{
+                      color: "white",
+                      backgroundColor: "#ff5700",
+                      border: "#ff5700",
+                    }} 
+
+                    onClick={handleClick}
+                  >
+                    Read More
+                  </Button>
+              
+
+
+              {/* <Link to={loggedIn ? "/post/" + post.id : <Login />}>
                 <Button
                   className="mx-2"
                   style={{
@@ -61,7 +83,7 @@ function Post({ post }) {
                 >
                   Read More
                 </Button>
-              </Link>
+              </Link> */}
             </div>
           </div>
         </Card.Body>

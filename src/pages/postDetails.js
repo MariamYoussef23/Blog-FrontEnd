@@ -29,18 +29,18 @@ function postDetails() {
 
   const addVote = async (sign) => {
     let voteChange = {
-      userId: 10,
-      userVote: sign,
+      userId: 1,
+      voteStatus: sign,
     };
     try {
       const data = await axios.post(
-        `https://api.tawwr.com/posts/${id}/vote`,
+        `http://localhost:5000/posts/${id}/vote`,
         voteChange
       );
-      const posts = await axios.get("https://api.tawwr.com/posts");
+      const posts = await axios.get("http://localhost:5000/posts");
       dispatch(getPosts(posts.data.data));
     } catch (error) {
-      console.error({ x: error });
+      console.error({ y: error });
     }
   };
 
@@ -92,7 +92,7 @@ function postDetails() {
                   style={{ color: "#ff5700" }}
                 />{" "}
                 {post.upVotesTotal}
-                {console.log(post)}
+                {/* {console.log(post)} */}
               </div>
             </div>
           </Card.Body>
